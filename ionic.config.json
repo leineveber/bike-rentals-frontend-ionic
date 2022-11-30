@@ -1,0 +1,7 @@
+{
+  "name": "bike-rentals-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
