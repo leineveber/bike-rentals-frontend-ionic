@@ -33,6 +33,11 @@ axiosInstance.interceptors.response.use(
       await queryClient.setQueryData(QueryKeysEnum.ACCOUNT, undefined);
     }
 
-    return Promise.reject(e);
+    const responseError = {
+      ...error,
+      message: e.response.data,
+    };
+
+    return Promise.reject(responseError);
   }
 );

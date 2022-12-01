@@ -60,7 +60,7 @@ const App: React.FC = () => (
             <IonIcon icon={bicycle} />
             <IonLabel>Bikes</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="account" href={RouteEnum.ACCOUNT}>
+          <IonTabButton tab="account" href={RouteEnum.SIGNUP}>
             <IonIcon icon={person} />
             <IonLabel>Account</IonLabel>
           </IonTabButton>

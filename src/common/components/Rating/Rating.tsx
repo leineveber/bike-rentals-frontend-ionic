@@ -12,9 +12,9 @@ const Rating: React.FC<Props> = ({ value }) => {
     <Flex gap={10}>
       {Array.from({ length: 5 }).map((_, i) =>
         i < value ? (
-          <IonIcon size="small" color="warning" icon={star} />
+          <IonIcon key={i} size="small" color="warning" icon={star} />
         ) : (
-          <IonIcon size="small" icon={starOutline} />
+          <IonIcon key={i} size="small" icon={starOutline} />
         )
       )}
     </Flex>

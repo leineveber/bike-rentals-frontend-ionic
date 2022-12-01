@@ -1,5 +1,8 @@
 export enum RouteEnum {
   BIKES = "/bikes",
-  ACCOUNT = "/account",
   SETTINGS = "/settings",
+  ACCOUNT = "/account",
+  SIGNUP = "/account/signup",
+  LOGIN = "/account/login",
+  DASHBOARD = "/account/dashboard",
 }
