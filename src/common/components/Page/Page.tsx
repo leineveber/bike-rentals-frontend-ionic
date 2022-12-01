@@ -15,6 +15,7 @@ interface Props {
   title: string;
   withBackButton?: boolean;
   withMenu?: boolean;
+  withPadding?: boolean;
   children: React.ReactNode;
 }
 
@@ -23,6 +24,7 @@ const Page: React.FC<Props> = ({
   title,
   withBackButton = false,
   withMenu = false,
+  withPadding = false,
   children,
 }) => {
   return (
@@ -42,7 +44,9 @@ const Page: React.FC<Props> = ({
           <IonTitle>{title}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>{children}</IonContent>
+      <IonContent className={withPadding ? "ion-padding" : ""}>
+        {children}
+      </IonContent>
     </IonPage>
   );
 };
