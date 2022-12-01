@@ -5,8 +5,11 @@ import { RouteEnum } from "../../../common/models/RouteEnum";
 import DashboardPage from "../../dashboard/pages/DashboardPage";
 import LoginPage from "../../login/pages/LoginPage";
 import SignupPage from "../../signup/pages/SignupPage";
+import { useMe } from "../../../common/hooks/useMe";
 
 const AccountPage: React.FC = () => {
+  const { data: user } = useMe();
+
   return (
     <IonPage>
       <IonRouterOutlet>
@@ -20,7 +23,7 @@ const AccountPage: React.FC = () => {
           <DashboardPage />
         </Route>
         <Route exact path={RouteEnum.ACCOUNT}>
-          <Redirect to={RouteEnum.SIGNUP} />
+          <Redirect to={user ? RouteEnum.DASHBOARD : RouteEnum.SIGNUP} />
         </Route>
       </IonRouterOutlet>
     </IonPage>

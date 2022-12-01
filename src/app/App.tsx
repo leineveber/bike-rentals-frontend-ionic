@@ -34,44 +34,49 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import { RouteEnum } from "../common/models/RouteEnum";
+import { useMe } from "../common/hooks/useMe";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path={RouteEnum.BIKES}>
-            <BikesListPage />
-          </Route>
-          <Route path={RouteEnum.ACCOUNT}>
-            <AccountPage />
-          </Route>
-          <Route path={RouteEnum.SETTINGS}>
-            <SettingsPage />
-          </Route>
-          <Route exact path="/">
-            <Redirect to={RouteEnum.BIKES} />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="bikes" href={RouteEnum.BIKES}>
-            <IonIcon icon={bicycle} />
-            <IonLabel>Bikes</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="account" href={RouteEnum.SIGNUP}>
-            <IonIcon icon={person} />
-            <IonLabel>Account</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="settings" href={RouteEnum.SETTINGS}>
-            <IonIcon icon={settings} />
-            <IonLabel>Settings</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  useMe();
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path={RouteEnum.BIKES}>
+              <BikesListPage />
+            </Route>
+            <Route path={RouteEnum.ACCOUNT}>
+              <AccountPage />
+            </Route>
+            <Route path={RouteEnum.SETTINGS}>
+              <SettingsPage />
+            </Route>
+            <Route exact path="/">
+              <Redirect to={RouteEnum.BIKES} />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="bikes" href={RouteEnum.BIKES}>
+              <IonIcon icon={bicycle} />
+              <IonLabel>Bikes</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="account" href={RouteEnum.ACCOUNT}>
+              <IonIcon icon={person} />
+              <IonLabel>Account</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="settings" href={RouteEnum.SETTINGS}>
+              <IonIcon icon={settings} />
+              <IonLabel>Settings</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;
