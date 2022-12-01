@@ -3,12 +3,16 @@ import { createRoot } from "react-dom/client";
 import App from "./app/App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
+import { queryClient } from "./common/query-client/QueryClient";
+import { QueryClientProvider } from "react-query";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
