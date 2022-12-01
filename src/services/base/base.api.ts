@@ -1,8 +1,8 @@
 import { Preferences } from "@capacitor/preferences";
 import axios from "axios";
-import { QueryKeysEnum } from "../../common/models/query-keys.enum";
-import { StorageKeysEnum } from "../../common/models/storage-keys.enum";
-import { queryClient } from "../../common/query-client/query-client";
+import { QueryKeysEnum } from "../../common/models/QueryKeysEnum";
+import { StorageKeysEnum } from "../../common/models/StorageKeysEnum";
+import { queryClient } from "../../common/query-client/QueryClient";
 
 const BASE_URL = "http://192.168.0.102:4444";
 

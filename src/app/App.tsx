@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { bicycle, person, settings } from "ionicons/icons";
-import BikesListPage from "../modules/settings/pages/SettingsPage";
+import BikesListPage from "../modules/bikes-list/pages/BikesListPage";
 import AccountPage from "../modules/account/pages/AccountPage";
 import SettingsPage from "../modules/settings/pages/SettingsPage";
 
@@ -50,6 +50,9 @@ const App: React.FC = () => (
           </Route>
           <Route path={RouteEnum.SETTINGS}>
             <SettingsPage />
+          </Route>
+          <Route exact path="/">
+            <Redirect to={RouteEnum.BIKES} />
           </Route>
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
