@@ -5,28 +5,19 @@ export interface Bike {
   photo: string;
   location: string;
   model: string;
-  rented: BikeRent[];
+  history?: Rent[];
 }
 
-export interface BikeRent {
-  accountID: number;
-  dateFrom: number;
-  dateTo?: number;
-}
-
-export interface BikeDetails {
+export interface Rent {
+  id: string;
   userID: number;
-  bikes: RentedBike[];
-}
-
-export interface RentedBike {
   dateFrom: number;
   dateTo?: number;
-  id: number;
-  rated?: number;
 }
 
-export interface SetBikeDetails {
+export interface RentBikeDetails {
   bikeID: number;
-  data: BikeRent[];
+  duration: number | string;
 }
+
+export type RentBikeResponse = string;

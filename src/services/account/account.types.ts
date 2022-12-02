@@ -1,9 +1,14 @@
-import { RentedBike } from "../bikes/bikes.types";
-
 export interface Account {
   id: number;
   email: string;
   password: string;
   role: string;
-  rentedBikes?: RentedBike[];
+  history?: AccountRent[];
+}
+
+export interface AccountRent {
+  id: string;
+  bikeID: number;
+  dateFrom: number;
+  dateTo?: number;
 }
