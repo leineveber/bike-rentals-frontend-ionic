@@ -1,14 +1,13 @@
 import { useIonAlert } from "@ionic/react";
 import { AxiosError } from "axios";
 import { useMutation } from "react-query";
-import { useMe } from "../../../common/hooks/useMe";
 import bikesAPI from "../../../services/bikes/bikes.api";
-import { RentBikeDetails } from "../../../services/bikes/bikes.types";
-import { useBikes } from "./useBikes";
+import { RateBikeDetails } from "../../../services/bikes/bikes.types";
+import { useBikes } from "../../bikes-list/hooks/useBikes";
 
-const rentBike = async (details: RentBikeDetails) => {
+const rateBike = async (details: RateBikeDetails) => {
   try {
-    const { data } = await bikesAPI.rentBike(details);
+    const { data } = await bikesAPI.rateBike(details);
 
     return data;
   } catch (error) {
@@ -16,15 +15,14 @@ const rentBike = async (details: RentBikeDetails) => {
   }
 };
 
-export const useRentBike = () => {
+export const useRateBike = () => {
   const [showAlert] = useIonAlert();
 
-  const { refetch: getMe } = useMe();
   const { refetch: getBikes } = useBikes();
 
-  return useMutation(rentBike, {
+  return useMutation(rateBike, {
     onSuccess: (data) => {
-      getMe();
+      showAlert({ message: data, buttons: ["Ok"] });
       getBikes();
     },
     onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),

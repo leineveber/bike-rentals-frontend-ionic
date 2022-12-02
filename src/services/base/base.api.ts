@@ -4,7 +4,8 @@ import { QueryKeysEnum } from "../../common/models/QueryKeysEnum";
 import { StorageKeysEnum } from "../../common/models/StorageKeysEnum";
 import { queryClient } from "../../common/query-client/QueryClient";
 
-const BASE_URL = "http://192.168.0.102:4444";
+// const BASE_URL = "http://192.168.0.102:4444";
+const BASE_URL = "http://localhost:4444";
 
 export const axiosInstance = axios.create({ baseURL: BASE_URL });
 

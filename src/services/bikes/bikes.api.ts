@@ -1,5 +1,14 @@
 import { axiosInstance } from "../base/base.api";
-import { Bike, RentBikeDetails, RentBikeResponse } from "./bikes.types";
+import { UserRent } from "../user/user.types";
+import {
+  Bike,
+  CancelBikeRentDetails,
+  CancelBikeRentResponse,
+  RateBikeDetails,
+  RateBikeResponse,
+  RentBikeDetails,
+  RentBikeResponse,
+} from "./bikes.types";
 
 class BikesAPI {
   getBikes() {
@@ -10,17 +19,17 @@ class BikesAPI {
     return axiosInstance.post<RentBikeResponse>("/rent", details);
   }
 
-  // cancelBikeRent({ userID, bikes }: BikeDetails) {
-  //   return axiosInstance.patch<Account>(`/users/${userID}`, {
-  //     rentedBikes: bikes,
-  //   });
-  // }
+  getRentedBikes() {
+    return axiosInstance.get<UserRent[]>("/rented-bikes");
+  }
 
-  // rateBike({ userID, bikes }: BikeDetails) {
-  //   return axiosInstance.patch<Account>(`/users/${userID}`, {
-  //     rentedBikes: bikes,
-  //   });
-  // }
+  cancelBikeRent(details: CancelBikeRentDetails) {
+    return axiosInstance.post<CancelBikeRentResponse>("/cancel", details);
+  }
+
+  rateBike(details: RateBikeDetails) {
+    return axiosInstance.post<RateBikeResponse>("rate", details);
+  }
 }
 
 const bikesAPI = new BikesAPI();

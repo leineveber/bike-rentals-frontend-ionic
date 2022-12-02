@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonCol, IonList, IonRow } from "@ionic/react";
+import { IonList } from "@ionic/react";
 import Page from "../../../common/components/Page/Page";
 import BikeCard from "../components/BikeCard/BikeCard";
 import BikesFilter from "../components/BikesFilter/BikesFilter";
@@ -31,21 +31,18 @@ const BikesListPage: React.FC = () => {
           <Loading />
         ) : (
           <IonList>
-            <IonRow>
-              {bikes?.map((bike) => (
-                <IonCol size="12" key={bike.id}>
-                  <BikeCard
-                    now={now}
-                    userID={user?.id}
-                    bike={bike}
-                    onRent={() => {
-                      setIsVisibleModal(true);
-                      setActiveBike(bike);
-                    }}
-                  />
-                </IonCol>
-              ))}
-            </IonRow>
+            {bikes?.map((bike) => (
+              <BikeCard
+                key={bike.id}
+                now={now}
+                userID={user?.id}
+                bike={bike}
+                onRent={() => {
+                  setIsVisibleModal(true);
+                  setActiveBike(bike);
+                }}
+              />
+            ))}
           </IonList>
         )}
       </Page>
