@@ -1,12 +1,12 @@
-export interface Account {
+export interface User {
   id: number;
   email: string;
   password: string;
   role: string;
-  history?: AccountRent[];
+  history?: UserRent[];
 }
 
-export interface AccountRent {
+export interface UserRent {
   id: string;
   bikeID: number;
   dateFrom: number;

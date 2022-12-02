@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import accountAPI from "../../services/account/account.api";
+import accountAPI from "../../services/user/user.api";
 import { QueryKeysEnum } from "../models/QueryKeysEnum";
 
 const getMe = async () => {

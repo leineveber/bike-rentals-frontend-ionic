@@ -1,13 +1,13 @@
 import { axiosInstance } from "../base/base.api";
-import { Account } from "./account.types";
+import { User } from "./user.types";
 
 class AccountAPI {
   getMe() {
-    return axiosInstance.get<Account>("/me");
+    return axiosInstance.get<User>("/me");
   }
 
   getAllAcounts() {
-    return axiosInstance.get<Account[]>("/users");
+    return axiosInstance.get<User[]>("/users");
   }
 
   deleteUser(id: number) {
