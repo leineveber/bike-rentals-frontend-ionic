@@ -1,13 +1,13 @@
 import { useQuery } from "react-query";
-import accountAPI from "../../services/user/user.api";
+import userAPI from "../../services/user/user.api";
 import { QueryKeysEnum } from "../models/QueryKeysEnum";
 
 const getMe = async () => {
-  const { data } = await accountAPI.getMe();
+  const { data } = await userAPI.getMe();
 
   return data;
 };
 
 export const useMe = () => {
-  return useQuery(QueryKeysEnum.ACCOUNT, getMe);
+  return useQuery(QueryKeysEnum.USER, getMe);
 };

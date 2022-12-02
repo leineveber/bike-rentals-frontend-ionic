@@ -1,10 +1,9 @@
 import { IonButton, IonInput, IonItem } from "@ionic/react";
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Center from "../../../common/components/Center/Center";
 import Page from "../../../common/components/Page/Page";
-import { useMe } from "../../../common/hooks/useMe";
+import { withNoUser } from "../../../common/hocs/withNoUser";
 import { RouteEnum } from "../../../common/models/RouteEnum";
 import { useLogin } from "../hooks/useLogin";
 
@@ -33,16 +32,6 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>("");
 
   const { mutate } = useLogin();
-
-  const { data: user } = useMe();
-
-  const history = useHistory();
-
-  useEffect(() => {
-    if (user) {
-      history.push(RouteEnum.DASHBOARD);
-    }
-  }, [user, history]);
 
   return (
     <Page withBackButton title="Signup">
@@ -73,4 +62,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default withNoUser(LoginPage);

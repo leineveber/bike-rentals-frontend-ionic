@@ -31,7 +31,7 @@ export const useLogin = () => {
         value: data.accessToken,
       });
 
-      await queryClient.setQueryData(QueryKeysEnum.ACCOUNT, data.user);
+      await queryClient.setQueryData(QueryKeysEnum.USER, data.user);
 
       history.push(RouteEnum.DASHBOARD);
     },

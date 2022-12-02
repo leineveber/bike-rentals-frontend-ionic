@@ -2,6 +2,7 @@ import { Preferences } from "@capacitor/preferences";
 import { useIonAlert } from "@ionic/react";
 import { AxiosError } from "axios";
 import { useMutation } from "react-query";
+import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
 import { StorageKeysEnum } from "../../../common/models/StorageKeysEnum";
 import { queryClient } from "../../../common/query-client/QueryClient";
 import authAPI from "../../../services/auth/auth.api";
@@ -23,7 +24,7 @@ export const useLogout = () => {
     onSuccess: async () => {
       await Preferences.remove({ key: StorageKeysEnum.ACCESS_TOKEN });
 
-      await queryClient.clear();
+      await queryClient.setQueryData(QueryKeysEnum.USER, () => undefined);
     },
     onError: (error: string) =>
       showAlert({ message: error || "Failed to log out", buttons: ["Ok"] }),

@@ -1,26 +1,49 @@
+import React from "react";
 import { IonButton } from "@ionic/react";
-import React, { useEffect } from "react";
-import { useHistory } from "react-router";
 import Page from "../../../common/components/Page/Page";
 import { useMe } from "../../../common/hooks/useMe";
-import { RouteEnum } from "../../../common/models/RouteEnum";
 import { useLogout } from "../hooks/useLogout";
+import { withUser } from "../../../common/hocs/withUser";
 
 const DashboardPage: React.FC = () => {
   const { data: user } = useMe();
 
   const { mutate: logout } = useLogout();
 
-  const history = useHistory();
-
-  useEffect(() => {
-    if (!user) {
-      history.push(RouteEnum.SIGNUP);
-    }
-  }, [user, history]);
-
   return (
     <Page withPadding title="Dashboard">
+      <IonButton fill="outline" className="ion-margin-bottom" expand="block">
+        Rented bikes
+      </IonButton>
+
+      {user?.role === "admin" && (
+        <>
+          <IonButton
+            fill="outline"
+            className="ion-margin-bottom"
+            expand="block"
+          >
+            All users
+          </IonButton>
+
+          <IonButton
+            fill="outline"
+            className="ion-margin-bottom"
+            expand="block"
+          >
+            Users, who reserved a bike
+          </IonButton>
+
+          <IonButton
+            fill="outline"
+            className="ion-margin-bottom"
+            expand="block"
+          >
+            Bikes, reserved by users
+          </IonButton>
+        </>
+      )}
+
       <IonButton expand="block" onClick={() => logout()}>
         Log out
       </IonButton>
@@ -28,4 +51,4 @@ const DashboardPage: React.FC = () => {
   );
 };
 
-export default DashboardPage;
+export default withUser(DashboardPage);
