@@ -8,13 +8,14 @@ import { Bike } from "../../../services/bikes/bikes.types";
 import BikeRentModal from "../components/BikeRentModal/BikeRentModal";
 import { dateService } from "../../../services/date/date.service";
 import { useMe } from "../../../common/hooks/useMe";
+import Loading from "../../../common/components/Loading/Loading";
 
 const filterID = "filter";
 
 let id: ReturnType<typeof setInterval>;
 
 const BikesListPage: React.FC = () => {
-  const { data: bikes } = useBikes();
+  const { data: bikes, isLoading } = useBikes();
 
   const { data: user } = useMe();
 
@@ -38,23 +39,27 @@ const BikesListPage: React.FC = () => {
       <BikesFilter id={filterID} />
 
       <Page id={filterID} title="Bikes" withMenu>
-        <IonList>
-          <IonRow>
-            {bikes?.map((bike) => (
-              <IonCol size="12" key={bike.id}>
-                <BikeCard
-                  now={now}
-                  userID={user?.id}
-                  bike={bike}
-                  onRent={() => {
-                    setIsVisibleModal(true);
-                    setActiveBike(bike);
-                  }}
-                />
-              </IonCol>
-            ))}
-          </IonRow>
-        </IonList>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <IonList>
+            <IonRow>
+              {bikes?.map((bike) => (
+                <IonCol size="12" key={bike.id}>
+                  <BikeCard
+                    now={now}
+                    userID={user?.id}
+                    bike={bike}
+                    onRent={() => {
+                      setIsVisibleModal(true);
+                      setActiveBike(bike);
+                    }}
+                  />
+                </IonCol>
+              ))}
+            </IonRow>
+          </IonList>
+        )}
       </Page>
 
       <BikeRentModal
