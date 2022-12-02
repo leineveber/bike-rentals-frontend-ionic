@@ -21,8 +21,7 @@ export const useRateBike = () => {
   const { refetch: getBikes } = useBikes();
 
   return useMutation(rateBike, {
-    onSuccess: (data) => {
-      showAlert({ message: data, buttons: ["Ok"] });
+    onSuccess: () => {
       getBikes();
     },
     onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),

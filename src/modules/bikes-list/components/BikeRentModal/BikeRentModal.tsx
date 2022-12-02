@@ -41,7 +41,7 @@ const BikeRentModal: React.FC<Props> = ({ bike, isOpen, onClose }) => {
   const { mutateAsync: rentBike } = useRentBike();
 
   return (
-    <IonModal isOpen={isOpen}>
+    <IonModal isOpen={isOpen} onDidDismiss={onClose}>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Duration</IonTitle>
@@ -56,6 +56,7 @@ const BikeRentModal: React.FC<Props> = ({ bike, isOpen, onClose }) => {
           {bike &&
             options.map((option, i, array) => (
               <IonButton
+                key={i}
                 expand="block"
                 fill={i === array.length - 1 ? "solid" : "outline"}
                 onClick={() => {

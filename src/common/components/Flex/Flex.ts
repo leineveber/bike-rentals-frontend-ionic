@@ -13,7 +13,7 @@ const Flex = styled.div<Props>`
   ${(props) => `flex-direction: ${props.direction || "row"}`};
   ${(props) => `gap: ${`${props.gap}px` || "0px"}`};
   ${(props) => `align-items: ${props.align || "unset"}`};
-  ${(props) => `justify-items: ${props.justify || "unset"}`};
+  ${(props) => `justify-content: ${props.justify || "unset"}`};
 `;
 
 export default Flex;
