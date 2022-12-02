@@ -1,7 +1,7 @@
 import { axiosInstance } from "../base/base.api";
 import { User } from "./user.types";
 
-class AccountAPI {
+class UserAPI {
   getMe() {
     return axiosInstance.get<User>("/me");
   }
@@ -15,6 +15,6 @@ class AccountAPI {
   }
 }
 
-const accountAPI = new AccountAPI();
+const userAPI = new UserAPI();
 
-export default accountAPI;
+export default userAPI;

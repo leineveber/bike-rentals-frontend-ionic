@@ -10,8 +10,6 @@ export function withUser<T extends {}>(Component: ComponentType<T>) {
     const [isAccessed, setIsAccessed] = useState(false);
     const history = useHistory();
 
-    console.log(user);
-
     useEffect(() => {
       if (user) {
         setIsAccessed(true);

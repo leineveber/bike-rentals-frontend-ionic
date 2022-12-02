@@ -7,7 +7,7 @@ import LoginPage from "../../login/pages/LoginPage";
 import SignupPage from "../../signup/pages/SignupPage";
 import { useMe } from "../../../common/hooks/useMe";
 
-const AccountPage: React.FC = () => {
+const UserPage: React.FC = () => {
   const { data: user } = useMe();
 
   return (
@@ -30,4 +30,4 @@ const AccountPage: React.FC = () => {
   );
 };
 
-export default AccountPage;
+export default UserPage;

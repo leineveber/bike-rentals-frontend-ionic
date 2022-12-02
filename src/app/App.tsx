@@ -12,7 +12,7 @@ import {
 import { IonReactRouter } from "@ionic/react-router";
 import { bicycle, person, settings } from "ionicons/icons";
 import BikesListPage from "../modules/bikes-list/pages/BikesListPage";
-import AccountPage from "../modules/account/pages/AccountPage";
+import UserPage from "../modules/user/pages/UserPage";
 import SettingsPage from "../modules/settings/pages/SettingsPage";
 
 /* Core CSS required for Ionic components to work properly */
@@ -50,7 +50,7 @@ const App: React.FC = () => {
               <BikesListPage />
             </Route>
             <Route path={RouteEnum.ACCOUNT}>
-              <AccountPage />
+              <UserPage />
             </Route>
             <Route path={RouteEnum.SETTINGS}>
               <SettingsPage />
