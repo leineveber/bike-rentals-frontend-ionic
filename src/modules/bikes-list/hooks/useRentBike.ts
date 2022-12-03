@@ -2,9 +2,14 @@ import { useIonAlert } from "@ionic/react";
 import { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { useMe } from "../../../common/hooks/useMe";
+import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
+import { queryClient } from "../../../common/query-client/QueryClient";
 import bikesAPI from "../../../services/bikes/bikes.api";
-import { RentBikeDetails } from "../../../services/bikes/bikes.types";
-import { useBikes } from "./useBikes";
+import {
+  Bike,
+  RentBikeDetails,
+  RentHistoryItem,
+} from "../../../services/bikes/bikes.types";
 
 const rentBike = async (details: RentBikeDetails) => {
   try {
@@ -19,13 +24,39 @@ const rentBike = async (details: RentBikeDetails) => {
 export const useRentBike = () => {
   const [showAlert] = useIonAlert();
 
-  const { refetch: getMe } = useMe();
-  const { refetch: getBikes } = useBikes();
+  const { data: user } = useMe();
 
   return useMutation(rentBike, {
-    onSuccess: (data) => {
-      getMe();
-      getBikes();
+    onSuccess: async (data, { bikeID }) => {
+      await queryClient.setQueryData(QueryKeysEnum.USER, (user: any) => {
+        return {
+          ...user,
+          history: user?.history?.length ? [...user.history, data] : [data],
+        };
+      });
+
+      await queryClient.setQueryData(QueryKeysEnum.BIKES, (bikes: any) => {
+        const newBikeRent: RentHistoryItem = {
+          id: data.id,
+          userID: user!.id,
+          dateFrom: data.dateFrom,
+        };
+
+        if (data?.dateTo) {
+          newBikeRent.dateTo = data.dateTo;
+        }
+
+        return bikes.map((bike: Bike) =>
+          bike.id === bikeID
+            ? {
+                ...bike,
+                history: bike?.history?.length
+                  ? [...bike.history, newBikeRent]
+                  : [newBikeRent],
+              }
+            : bike
+        );
+      });
     },
     onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),
   });

@@ -1,3 +1,5 @@
+import { UserRent } from "../user/user.types";
+
 export interface Bike {
   id: number;
   color: string;
@@ -19,7 +21,6 @@ export interface RentHistoryItem {
   userID: number;
   dateFrom: number;
   dateTo?: number;
-  rated: number | null;
 }
 
 export interface RentBikeDetails {
@@ -27,7 +28,7 @@ export interface RentBikeDetails {
   duration: number | string;
 }
 
-export type RentBikeResponse = string;
+export type RentBikeResponse = UserRent;
 
 export interface RateBikeDetails {
   bikeID: number;
