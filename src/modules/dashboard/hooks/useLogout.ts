@@ -24,7 +24,7 @@ export const useLogout = () => {
     onSuccess: async () => {
       await Preferences.remove({ key: StorageKeysEnum.ACCESS_TOKEN });
 
-      await queryClient.setQueryData(QueryKeysEnum.USER, () => undefined);
+      await queryClient.setQueryData(QueryKeysEnum.USER, () => null);
     },
     onError: (error: string) =>
       showAlert({ message: error || "Failed to log out", buttons: ["Ok"] }),

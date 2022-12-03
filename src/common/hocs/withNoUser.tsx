@@ -11,9 +11,9 @@ export function withNoUser<T extends {}>(Component: ComponentType<T>) {
     const history = useHistory();
 
     useEffect(() => {
-      if (!user) {
+      if (user === null) {
         setIsAccessed(true);
-      } else {
+      } else if (user !== undefined) {
         history.push(RouteEnum.DASHBOARD);
       }
     }, [user, history]);
