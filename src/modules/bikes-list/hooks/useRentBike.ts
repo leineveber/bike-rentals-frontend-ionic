@@ -55,13 +55,6 @@ export const useRentBike = () => {
             : bike
         );
       });
-
-      queryClient.setQueryData(
-        QueryKeysEnum.RENTED_BIKES,
-        (rentedBikes: any) => {
-          return rentedBikes ? [...rentedBikes, data] : [data];
-        }
-      );
     },
     onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),
   });

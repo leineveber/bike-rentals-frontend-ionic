@@ -33,6 +33,7 @@ export const useCancelBike = () => {
           ),
         };
       });
+
       await queryClient.setQueryData(QueryKeysEnum.BIKES, (bikes: any) => {
         return bikes.map((bike: Bike) => ({
           ...bike,

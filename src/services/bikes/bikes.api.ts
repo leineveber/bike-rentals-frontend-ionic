@@ -1,5 +1,4 @@
 import { axiosInstance } from "../base/base.api";
-import { UserRent } from "../user/user.types";
 import {
   Bike,
   CancelBikeRentDetails,
@@ -17,10 +16,6 @@ class BikesAPI {
 
   rentBike(details: RentBikeDetails) {
     return axiosInstance.post<RentBikeResponse>("/rent", details);
-  }
-
-  getRentedBikes() {
-    return axiosInstance.get<UserRent[]>("/rented-bikes");
   }
 
   cancelBikeRent(details: CancelBikeRentDetails) {

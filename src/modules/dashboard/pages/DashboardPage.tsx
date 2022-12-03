@@ -3,7 +3,6 @@ import { IonButton } from "@ionic/react";
 import Page from "../../../common/components/Page/Page";
 import { useMe } from "../../../common/hooks/useMe";
 import { useLogout } from "../hooks/useLogout";
-import { withUser } from "../../../common/hocs/withUser";
 import { RouteEnum } from "../../../common/models/RouteEnum";
 
 const DashboardPage: React.FC = () => {
@@ -60,4 +59,4 @@ const DashboardPage: React.FC = () => {
   );
 };
 
-export default withUser(DashboardPage);
+export default DashboardPage;

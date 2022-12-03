@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import Empty from "../../../common/components/Empty/Empty";
 import Loading from "../../../common/components/Loading/Loading";
 import Page from "../../../common/components/Page/Page";
-import { withUser } from "../../../common/hocs/withUser";
 import { useMe } from "../../../common/hooks/useMe";
 import { useNow } from "../../../common/hooks/useNow";
 import { Bike } from "../../../services/bikes/bikes.types";
@@ -11,12 +10,10 @@ import { useBikes } from "../../bikes-list/hooks/useBikes";
 import RateBikePopover from "../components/RateBikePopover/RateBikePopover";
 import RentedBikeCard from "../components/RentedBikeCard/RentedBikeCard";
 import { useCancelBike } from "../hooks/useCancelBike";
-import { useRentedBikes } from "../hooks/useRentedBikes";
 
 const RentedBikesPage: React.FC = () => {
-  const { data: rentedBikes, isLoading } = useRentedBikes();
   const { data: bikes } = useBikes();
-  const { data: user } = useMe();
+  const { data: user, isLoading } = useMe();
   const { mutateAsync: cancelBike } = useCancelBike();
 
   const [isVisiblePopover, setIsVisiblePopover] = useState(false);
@@ -25,6 +22,8 @@ const RentedBikesPage: React.FC = () => {
   const { now } = useNow();
 
   const popoverRef = useRef<HTMLIonPopoverElement>(null);
+
+  const rentedBikes = user?.history || [];
 
   return (
     <>
@@ -83,4 +82,4 @@ const RentedBikesPage: React.FC = () => {
   );
 };
 
-export default withUser(RentedBikesPage);
+export default RentedBikesPage;
