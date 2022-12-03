@@ -34,7 +34,7 @@ export interface RateBikeDetails {
   bikeID: number;
   rating: number;
 }
-export type RateBikeResponse = string;
+export type RateBikeResponse = Bike;
 
 export interface CancelBikeRentDetails {
   rideID: string;
