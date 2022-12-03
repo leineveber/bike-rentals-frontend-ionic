@@ -1,5 +1,5 @@
 import { IonList } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Empty from "../../../common/components/Empty/Empty";
 import Loading from "../../../common/components/Loading/Loading";
 import Page from "../../../common/components/Page/Page";
@@ -23,6 +23,8 @@ const RentedBikesPage: React.FC = () => {
   const [activeBike, setActiveBike] = useState<Bike | null>(null);
 
   const { now } = useNow();
+
+  const popoverRef = useRef<HTMLIonPopoverElement>(null);
 
   return (
     <>
@@ -56,7 +58,8 @@ const RentedBikesPage: React.FC = () => {
                   isCancellable={isCancellable}
                   onCancel={() => cancelBike({ rideID: rentedBike.id })}
                   isRateable={isRateable}
-                  onRate={() => {
+                  onRate={(event) => {
+                    popoverRef.current!.event = event;
                     setActiveBike(currentBike);
                     setIsVisiblePopover(true);
                   }}
@@ -68,6 +71,7 @@ const RentedBikesPage: React.FC = () => {
       </Page>
 
       <RateBikePopover
+        ref={popoverRef}
         bike={activeBike}
         isOpen={isVisiblePopover}
         onClose={() => {

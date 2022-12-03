@@ -17,7 +17,7 @@ interface Props {
   rentedBike: UserRent;
   onCancel: () => void;
   isCancellable: boolean;
-  onRate: () => void;
+  onRate: (event: any) => void;
   isRateable: boolean;
 }
 
@@ -57,9 +57,11 @@ const RentedBikeCard: React.FC<Props> = ({
         )}
 
         {isRateable && (
-          <IonButton expand="block" onClick={onRate}>
-            Rate this bike!
-          </IonButton>
+          <>
+            <IonButton expand="block" onClick={onRate}>
+              Rate this bike!
+            </IonButton>
+          </>
         )}
       </IonCardContent>
     </IonCard>
