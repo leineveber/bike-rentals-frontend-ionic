@@ -13,10 +13,10 @@ export function withAdmin<T extends {}>(Component: ComponentType<T>) {
     useEffect(() => {
       if (user?.role === "admin") {
         setIsAccessed(true);
-      } else {
+      } else if (user !== undefined) {
         history.push(RouteEnum.DASHBOARD);
       }
-    }, [user?.role, history]);
+    }, [user, history]);
 
     return !isAccessed ? <Loading /> : <Component {...props} />;
   };
