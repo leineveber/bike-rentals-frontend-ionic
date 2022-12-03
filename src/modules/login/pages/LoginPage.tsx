@@ -34,7 +34,7 @@ const LoginPage: React.FC = () => {
   const { mutate } = useLogin();
 
   return (
-    <Page withBackButton title="Signup">
+    <Page withBackButton title="Login" defaultBackButtonHref={RouteEnum.SIGNUP}>
       <Container innerClassName="ion-padding">
         <Item>
           <Input

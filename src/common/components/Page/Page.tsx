@@ -14,6 +14,7 @@ interface Props {
   id?: string;
   title: string;
   withBackButton?: boolean;
+  defaultBackButtonHref?: string;
   withMenu?: boolean;
   withPadding?: boolean;
   children: React.ReactNode;
@@ -25,6 +26,7 @@ const Page: React.FC<Props> = ({
   withBackButton = false,
   withMenu = false,
   withPadding = false,
+  defaultBackButtonHref,
   children,
 }) => {
   return (
@@ -33,7 +35,11 @@ const Page: React.FC<Props> = ({
         <IonToolbar>
           {withBackButton && (
             <IonButtons slot="start">
-              <IonBackButton />
+              <IonBackButton
+                {...(defaultBackButtonHref && {
+                  defaultHref: defaultBackButtonHref,
+                })}
+              />
             </IonButtons>
           )}
           {withMenu && (

@@ -6,6 +6,7 @@ import Page from "../../../common/components/Page/Page";
 import { withUser } from "../../../common/hocs/withUser";
 import { useMe } from "../../../common/hooks/useMe";
 import { useNow } from "../../../common/hooks/useNow";
+import { RouteEnum } from "../../../common/models/RouteEnum";
 import { Bike } from "../../../services/bikes/bikes.types";
 import { useBikes } from "../../bikes-list/hooks/useBikes";
 import RateBikePopover from "../components/RateBikePopover/RateBikePopover";
@@ -28,7 +29,11 @@ const RentedBikesPage: React.FC = () => {
 
   return (
     <>
-      <Page withBackButton title="Rented bikes">
+      <Page
+        withBackButton
+        defaultBackButtonHref={RouteEnum.DASHBOARD}
+        title="Rented bikes"
+      >
         {isLoading ? (
           <Loading />
         ) : !rentedBikes || !rentedBikes?.length ? (
