@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import Empty from "../../../common/components/Empty/Empty";
 import Loading from "../../../common/components/Loading/Loading";
 import Page from "../../../common/components/Page/Page";
+import { withUser } from "../../../common/hocs/withUser";
 import { useMe } from "../../../common/hooks/useMe";
 import { useNow } from "../../../common/hooks/useNow";
 import { Bike } from "../../../services/bikes/bikes.types";
@@ -82,4 +83,4 @@ const RentedBikesPage: React.FC = () => {
   );
 };
 
-export default RentedBikesPage;
+export default withUser(RentedBikesPage);

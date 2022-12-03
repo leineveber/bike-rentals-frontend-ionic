@@ -13,7 +13,7 @@ export function withUser<T extends {}>(Component: ComponentType<T>) {
     useEffect(() => {
       if (user) {
         setIsAccessed(true);
-      } else {
+      } else if (user !== undefined) {
         history.push(RouteEnum.SIGNUP);
       }
     }, [user, history]);

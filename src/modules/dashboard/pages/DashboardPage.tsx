@@ -4,6 +4,7 @@ import Page from "../../../common/components/Page/Page";
 import { useMe } from "../../../common/hooks/useMe";
 import { useLogout } from "../hooks/useLogout";
 import { RouteEnum } from "../../../common/models/RouteEnum";
+import { withUser } from "../../../common/hocs/withUser";
 
 const DashboardPage: React.FC = () => {
   const { data: user } = useMe();
@@ -59,4 +60,4 @@ const DashboardPage: React.FC = () => {
   );
 };
 
-export default DashboardPage;
+export default withUser(DashboardPage);
