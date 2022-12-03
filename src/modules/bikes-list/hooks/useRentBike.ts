@@ -27,25 +27,23 @@ export const useRentBike = () => {
   const { data: user } = useMe();
 
   return useMutation(rentBike, {
-    onSuccess: async (data, { bikeID }) => {
-      await queryClient.setQueryData(QueryKeysEnum.USER, (user: any) => {
+    onSuccess: (data, { bikeID }) => {
+      queryClient.setQueryData(QueryKeysEnum.USER, (user: any) => {
         return {
           ...user,
           history: user?.history?.length ? [...user.history, data] : [data],
         };
       });
 
-      await queryClient.setQueryData(QueryKeysEnum.BIKES, (bikes: any) => {
+      queryClient.setQueryData(QueryKeysEnum.BIKES, (bikes: any) => {
         const newBikeRent: RentHistoryItem = {
           id: data.id,
           userID: user!.id,
           dateFrom: data.dateFrom,
         };
-
         if (data?.dateTo) {
           newBikeRent.dateTo = data.dateTo;
         }
-
         return bikes.map((bike: Bike) =>
           bike.id === bikeID
             ? {
@@ -57,6 +55,13 @@ export const useRentBike = () => {
             : bike
         );
       });
+
+      queryClient.setQueryData(
+        QueryKeysEnum.RENTED_BIKES,
+        (rentedBikes: any) => {
+          return rentedBikes ? [...rentedBikes, data] : [data];
+        }
+      );
     },
     onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),
   });

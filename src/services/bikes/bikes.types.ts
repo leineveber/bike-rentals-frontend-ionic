@@ -40,4 +40,4 @@ export interface CancelBikeRentDetails {
   rideID: string;
 }
 
-export type CancelBikeRentResponse = string;
+export type CancelBikeRentResponse = UserRent;

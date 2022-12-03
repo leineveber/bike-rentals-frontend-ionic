@@ -1,10 +1,14 @@
 import { useIonAlert } from "@ionic/react";
 import { AxiosError } from "axios";
 import { useMutation } from "react-query";
-import { useMe } from "../../../common/hooks/useMe";
+import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
+import { queryClient } from "../../../common/query-client/QueryClient";
 import bikesAPI from "../../../services/bikes/bikes.api";
-import { CancelBikeRentDetails } from "../../../services/bikes/bikes.types";
-import { useBikes } from "../../bikes-list/hooks/useBikes";
+import {
+  Bike,
+  CancelBikeRentDetails,
+} from "../../../services/bikes/bikes.types";
+import { UserRent } from "../../../services/user/user.types";
 
 const cancelBike = async (details: CancelBikeRentDetails) => {
   try {
@@ -19,13 +23,26 @@ const cancelBike = async (details: CancelBikeRentDetails) => {
 export const useCancelBike = () => {
   const [showAlert] = useIonAlert();
 
-  const { refetch: getMe } = useMe();
-  const { refetch: getBikes } = useBikes();
-
   return useMutation(cancelBike, {
-    onSuccess: () => {
-      getMe();
-      getBikes();
+    onSuccess: async (data) => {
+      await queryClient.setQueryData(QueryKeysEnum.USER, (user: any) => {
+        return {
+          ...user,
+          history: user.history?.map((rentedBike: UserRent) =>
+            rentedBike.id === data.id ? data : rentedBike
+          ),
+        };
+      });
+      await queryClient.setQueryData(QueryKeysEnum.BIKES, (bikes: any) => {
+        return bikes.map((bike: Bike) => ({
+          ...bike,
+          history: bike.history?.map((historyItem) =>
+            historyItem.id === data.id
+              ? { ...historyItem, dateTo: data.dateTo }
+              : historyItem
+          ),
+        }));
+      });
     },
     onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),
   });
