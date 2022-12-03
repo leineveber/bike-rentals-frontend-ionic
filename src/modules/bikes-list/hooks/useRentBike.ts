@@ -56,6 +56,10 @@ export const useRentBike = () => {
         );
       });
     },
-    onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),
+    onError: (error: string) =>
+      showAlert({
+        message: error || "Failed to rent the bike",
+        buttons: ["Ok"],
+      }),
   });
 };

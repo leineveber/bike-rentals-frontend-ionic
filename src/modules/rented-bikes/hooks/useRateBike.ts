@@ -25,6 +25,10 @@ export const useRateBike = () => {
         return bikes.map((bike: Bike) => (bike.id === data.id ? data : bike));
       });
     },
-    onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),
+    onError: (error: string) =>
+      showAlert({
+        message: error || "Failed to rate the bike",
+        buttons: ["Ok"],
+      }),
   });
 };

@@ -45,6 +45,10 @@ export const useCancelBike = () => {
         }));
       });
     },
-    onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),
+    onError: (error: string) =>
+      showAlert({
+        message: error || "Failed to cancel the ride",
+        buttons: ["Ok"],
+      }),
   });
 };

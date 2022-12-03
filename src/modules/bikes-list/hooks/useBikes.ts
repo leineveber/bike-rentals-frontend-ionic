@@ -10,7 +10,7 @@ const getBikes = async () => {
 
     return data;
   } catch (error) {
-    throw (error as AxiosError).message || "Failed to get bikes";
+    throw (error as AxiosError).message;
   }
 };
 
@@ -18,6 +18,7 @@ export const useBikes = () => {
   const [showAlert] = useIonAlert();
 
   return useQuery(QueryKeysEnum.BIKES, getBikes, {
-    onError: (error: string) => showAlert({ message: error, buttons: ["Ok"] }),
+    onError: (error: string) =>
+      showAlert({ message: error || "Failed to get bikes", buttons: ["Ok"] }),
   });
 };
