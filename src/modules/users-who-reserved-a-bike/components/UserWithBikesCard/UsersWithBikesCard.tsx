@@ -1,3 +1,4 @@
+import React from "react";
 import {
   IonButton,
   IonCard,
@@ -5,17 +6,14 @@ import {
   IonCardHeader,
   IonCardTitle,
 } from "@ionic/react";
-import React from "react";
 import { User } from "../../../../services/user/user.types";
 
 interface Props {
   user: User;
-  onDelete: () => void;
+  onHistory: () => void;
 }
 
-const UserCard: React.FC<Props> = ({ user, onDelete }) => {
-  const isDisabled = user.role === "admin";
-
+const UsersWithBikesCard: React.FC<Props> = ({ user, onHistory }) => {
   return (
     <IonCard>
       <IonCardHeader>
@@ -23,12 +21,10 @@ const UserCard: React.FC<Props> = ({ user, onDelete }) => {
       </IonCardHeader>
 
       <IonCardContent>
-        <IonButton expand="block" disabled={isDisabled} onClick={onDelete}>
-          Delete
-        </IonButton>
+        <IonButton onClick={onHistory}>History</IonButton>
       </IonCardContent>
     </IonCard>
   );
 };
 
-export default UserCard;
+export default UsersWithBikesCard;
