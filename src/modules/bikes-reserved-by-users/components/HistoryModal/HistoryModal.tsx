@@ -12,18 +12,18 @@ import {
 } from "@ionic/react";
 import React from "react";
 import Flex from "../../../../common/components/Flex/Flex";
+import { RentHistoryItem } from "../../../../services/bikes/bikes.types";
 import { dateService } from "../../../../services/date/date.service";
-import { UserRent } from "../../../../services/user/user.types";
-import { useBikes } from "../../../bikes-list/hooks/useBikes";
+import { useAllUsers } from "../../../all-users/hooks/useAllUsers";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  history: UserRent[] | null | undefined;
+  history: RentHistoryItem[] | null | undefined;
 }
 
 const HistoryModal: React.FC<Props> = ({ isOpen, onClose, history }) => {
-  const { data: bikes } = useBikes();
+  const { data: users } = useAllUsers();
 
   return (
     <IonModal isOpen={isOpen} onDidDismiss={onClose}>
@@ -42,9 +42,9 @@ const HistoryModal: React.FC<Props> = ({ isOpen, onClose, history }) => {
             <IonItem key={item.id}>
               <div>
                 <Flex gap={5}>
-                  <IonLabel>Model:</IonLabel>
+                  <IonLabel>Email:</IonLabel>
                   <IonLabel>
-                    {bikes?.find((bike) => bike.id === item.bikeID)?.model}
+                    {users?.find((user) => user.id === item.userID)?.email}
                   </IonLabel>
                 </Flex>
 

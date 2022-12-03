@@ -6,18 +6,18 @@ import {
   IonCardHeader,
   IonCardTitle,
 } from "@ionic/react";
-import { User } from "../../../../services/user/user.types";
+import { Bike } from "../../../../services/bikes/bikes.types";
 
 interface Props {
-  user: User;
+  bike: Bike;
   onHistory: () => void;
 }
 
-const UsersWithBikesCard: React.FC<Props> = ({ user, onHistory }) => {
+const BikeByUserCard: React.FC<Props> = ({ bike, onHistory }) => {
   return (
     <IonCard>
       <IonCardHeader>
-        <IonCardTitle>{user.email}</IonCardTitle>
+        <IonCardTitle>{bike.model}</IonCardTitle>
       </IonCardHeader>
 
       <IonCardContent>
@@ -29,4 +29,4 @@ const UsersWithBikesCard: React.FC<Props> = ({ user, onHistory }) => {
   );
 };
 
-export default UsersWithBikesCard;
+export default BikeByUserCard;
