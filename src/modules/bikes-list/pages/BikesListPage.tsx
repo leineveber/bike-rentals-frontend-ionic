@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { IonList } from "@ionic/react";
 import Page from "../../../common/components/Page/Page";
 import BikeCard from "../components/BikeCard/BikeCard";
@@ -10,6 +10,8 @@ import { useMe } from "../../../common/hooks/useMe";
 import Loading from "../../../common/components/Loading/Loading";
 import { useNow } from "../../../common/hooks/useNow";
 import { Filter } from "../models/filter.model";
+import { getFilteredBikes } from "../utils/FilterService";
+import Empty from "../../../common/components/Empty/Empty";
 
 const filterID = "filter";
 
@@ -32,51 +34,12 @@ const BikesListPage: React.FC = () => {
 
   const { now } = useNow();
 
-  console.log(filter);
+  // Filters can be debounced if needed
 
-  const filterByColor = (array: Bike[]) =>
-    array.filter((bike) =>
-      filter.color.some((color) =>
-        bike.color.toLowerCase().includes(color.toLowerCase())
-      )
-    );
-
-  const filterByModel = (array: Bike[]) =>
-    array.filter((bike) =>
-      filter.model.some((model) =>
-        bike.model.toLowerCase().includes(model.toLowerCase())
-      )
-    );
-
-  const filterByLocation = (array: Bike[]) =>
-    array.filter((bike) =>
-      bike.location.toLowerCase().includes(filter.location.toLowerCase())
-    );
-
-  const filterByRating = (array: Bike[]) =>
-    array.filter(
-      (bike) =>
-        parseInt(filter.rating[0], 10) <= bike.rating &&
-        parseInt(filter.rating[1], 10) >= bike.rating
-    );
-
-  const getFilteredBikes = () => {
-    if (bikes) {
-      let result: Bike[] = bikes;
-
-      result = filter.color.length ? filterByColor(result) : result;
-      result = filter.model.length ? filterByModel(result) : result;
-      result = filter.location ? filterByLocation(result) : result;
-      result =
-        filter.rating[0] && filter.rating[1] ? filterByRating(result) : result;
-
-      return result;
-    }
-
-    return [];
-  };
-
-  const filteredBikes = getFilteredBikes();
+  const filteredBikes = useMemo(
+    () => (bikes ? getFilteredBikes(bikes, filter) : null),
+    [bikes, filter]
+  );
 
   return (
     <>
@@ -85,7 +48,9 @@ const BikesListPage: React.FC = () => {
       <Page id={filterID} title="Bikes" withMenu>
         {isLoading ? (
           <Loading />
-        ) : (
+        ) : !filteredBikes ? (
+          <Empty />
+        ) : filteredBikes?.length ? (
           <IonList>
             {filteredBikes.map((bike) => (
               <BikeCard
@@ -100,6 +65,8 @@ const BikesListPage: React.FC = () => {
               />
             ))}
           </IonList>
+        ) : (
+          <Empty additionalText="Please try to change your filter query" />
         )}
       </Page>
 

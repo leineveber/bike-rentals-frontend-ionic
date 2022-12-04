@@ -20,8 +20,6 @@ interface Props extends FilterProps {
   id: string;
 }
 
-// ALL FILTERS CAN BE DEBOUNCED IF NEEDED
-
 const BikesFilter: React.FC<Props> = ({ id, setFilter, filter }) => {
   const { data: bikes } = useBikes();
 
