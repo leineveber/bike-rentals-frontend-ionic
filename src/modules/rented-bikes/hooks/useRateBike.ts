@@ -20,8 +20,8 @@ export const useRateBike = () => {
   const [showAlert] = useIonAlert();
 
   return useMutation(rateBike, {
-    onSuccess: (data) => {
-      queryClient.setQueryData(QueryKeysEnum.BIKES, (bikes: any) => {
+    onSuccess: async (data) => {
+      await queryClient.setQueryData(QueryKeysEnum.BIKES, (bikes: any) => {
         return bikes.map((bike: Bike) => (bike.id === data.id ? data : bike));
       });
     },
