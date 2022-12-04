@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
 
     if (error.status === 401) {
       await Preferences.remove({ key: StorageKeysEnum.ACCESS_TOKEN });
-      await queryClient.setQueryData(QueryKeysEnum.USER, undefined);
+      await queryClient.setQueryData(QueryKeysEnum.USER, null);
     }
 
     const responseError = {
