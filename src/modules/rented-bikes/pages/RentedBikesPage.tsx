@@ -1,5 +1,5 @@
 import { IonList } from "@ionic/react";
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import Empty from "../../../common/components/Empty/Empty";
 import Loading from "../../../common/components/Loading/Loading";
 import Page from "../../../common/components/Page/Page";
@@ -25,7 +25,7 @@ const RentedBikesPage: React.FC = () => {
 
   const popoverRef = useRef<HTMLIonPopoverElement>(null);
 
-  const rentedBikes = user?.history || [];
+  const rentedBikes = useMemo(() => user?.history, [user?.history]);
 
   return (
     <>
@@ -40,7 +40,7 @@ const RentedBikesPage: React.FC = () => {
           <Empty />
         ) : (
           <IonList>
-            {rentedBikes.map((rentedBike) => {
+            {rentedBikes.reverse().map((rentedBike) => {
               const currentBike = bikes?.find(
                 (bike) => bike.id === rentedBike.bikeID
               );
