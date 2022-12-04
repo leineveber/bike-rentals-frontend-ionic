@@ -25,7 +25,10 @@ const RentedBikesPage: React.FC = () => {
 
   const popoverRef = useRef<HTMLIonPopoverElement>(null);
 
-  const rentedBikes = useMemo(() => user?.history, [user?.history]);
+  const rentedBikes = useMemo(
+    () => [...(user?.history || [])].reverse(),
+    [user?.history]
+  );
 
   return (
     <>
@@ -40,7 +43,7 @@ const RentedBikesPage: React.FC = () => {
           <Empty />
         ) : (
           <IonList>
-            {rentedBikes.reverse().map((rentedBike) => {
+            {rentedBikes.map((rentedBike) => {
               const currentBike = bikes?.find(
                 (bike) => bike.id === rentedBike.bikeID
               );
