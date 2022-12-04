@@ -57,7 +57,7 @@ const HistoryModal: React.FC<Props> = ({ isOpen, onClose, history }) => {
                   <IonLabel>Date to:</IonLabel>
                   <IonLabel>
                     {item.dateTo
-                      ? dateService.format(item.dateFrom)
+                      ? dateService.format(item.dateTo)
                       : "Unlimited"}
                   </IonLabel>
                 </Flex>
