@@ -48,7 +48,7 @@ const UserPage: React.FC = () => {
 
   return (
     <IonPage>
-      {!user ? (
+      {user === undefined ? (
         <Loading />
       ) : (
         <IonRouterOutlet>
