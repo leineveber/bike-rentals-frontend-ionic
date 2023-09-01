@@ -9,8 +9,8 @@ import {
 } from "@ionic/react";
 import React from "react";
 import Center from "../../../../common/components/Center/Center";
-import { Bike } from "../../../../services/bikes/bikes.types";
 import { useRentBike } from "../../hooks/useRentBike";
+import { Bike } from "../../../../api/bikes/bikes.types";
 
 const options = [
   {

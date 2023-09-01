@@ -6,7 +6,7 @@ import {
   IonCardHeader,
   IonCardTitle,
 } from "@ionic/react";
-import { User } from "../../../../services/user/user.types";
+import { User } from "../../../../api/user/user.types";
 
 interface Props {
   user: User;

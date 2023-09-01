@@ -7,10 +7,10 @@ import {
   IonCardTitle,
   IonLabel,
 } from "@ionic/react";
-import { Bike } from "../../../../services/bikes/bikes.types";
 import Flex from "../../../../common/components/Flex/Flex";
 import { dateService } from "../../../../services/date/date.service";
-import { UserRent } from "../../../../services/user/user.types";
+import { Bike } from "../../../../api/bikes/bikes.types";
+import { UserRent } from "../../../../api/user/user.types";
 
 interface Props {
   bike: Bike;

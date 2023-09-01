@@ -3,12 +3,12 @@ import { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
 import { queryClient } from "../../../common/query-client/QueryClient";
-import bikesAPI from "../../../services/bikes/bikes.api";
-import { Bike, RateBikeDetails } from "../../../services/bikes/bikes.types";
+import bikesAPI from "../../../api/bikes/bikes.api";
+import { Bike, RateBikeDetails } from "../../../api/bikes/bikes.types";
 
 const rateBike = async (details: RateBikeDetails) => {
   try {
-    const { data } = await bikesAPI.rateBike(details);
+    const data = await bikesAPI.rateBike(details);
 
     return data;
   } catch (error) {

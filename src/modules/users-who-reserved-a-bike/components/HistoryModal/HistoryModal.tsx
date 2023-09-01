@@ -13,8 +13,8 @@ import {
 import React from "react";
 import Flex from "../../../../common/components/Flex/Flex";
 import { dateService } from "../../../../services/date/date.service";
-import { UserRent } from "../../../../services/user/user.types";
 import { useBikes } from "../../../bikes-list/hooks/useBikes";
+import { UserRent } from "../../../../api/user/user.types";
 
 interface Props {
   isOpen: boolean;

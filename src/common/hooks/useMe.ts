@@ -1,12 +1,12 @@
 import { AxiosError } from "axios";
 import { useQuery } from "react-query";
-import userAPI from "../../services/user/user.api";
 import { QueryKeysEnum } from "../models/QueryKeysEnum";
 import { queryClient } from "../query-client/QueryClient";
+import userAPI from "../../api/user/user.api";
 
 const getMe = async () => {
   try {
-    const { data } = await userAPI.getMe();
+    const data = await userAPI.getMe();
 
     return data;
   } catch (error) {

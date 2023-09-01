@@ -6,7 +6,7 @@ import {
   IonCardHeader,
   IonCardTitle,
 } from "@ionic/react";
-import { Bike } from "../../../../services/bikes/bikes.types";
+import { Bike } from "../../../../api/bikes/bikes.types";
 
 interface Props {
   bike: Bike;

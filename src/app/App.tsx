@@ -35,8 +35,45 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import { RouteEnum } from "../common/models/RouteEnum";
 import { useMe } from "../common/hooks/useMe";
+import { TabsEnum } from "../common/models/TabsEnum";
 
 setupIonicReact();
+
+const routes = [
+  {
+    path: RouteEnum.BIKES,
+    Component: BikesListPage,
+  },
+  {
+    path: RouteEnum.ACCOUNT,
+    Component: UserPage,
+  },
+  {
+    path: RouteEnum.SETTINGS,
+    Component: SettingsPage,
+  },
+];
+
+const tabs = [
+  {
+    name: TabsEnum.BIKES,
+    href: RouteEnum.BIKES,
+    icon: bicycle,
+    label: "Bikes",
+  },
+  {
+    name: TabsEnum.ACCOUNT,
+    href: RouteEnum.ACCOUNT,
+    icon: person,
+    label: "Account",
+  },
+  {
+    name: TabsEnum.SETTINGS,
+    href: RouteEnum.SETTINGS,
+    icon: settings,
+    label: "Settings",
+  },
+];
 
 const App: React.FC = () => {
   useMe();
@@ -46,32 +83,22 @@ const App: React.FC = () => {
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route path={RouteEnum.BIKES}>
-              <BikesListPage />
-            </Route>
-            <Route path={RouteEnum.ACCOUNT}>
-              <UserPage />
-            </Route>
-            <Route path={RouteEnum.SETTINGS}>
-              <SettingsPage />
-            </Route>
+            {routes.map(({ path, Component }) => (
+              <Route key={path} path={path}>
+                <Component />
+              </Route>
+            ))}
             <Route exact path="/">
               <Redirect to={RouteEnum.BIKES} />
             </Route>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
-            <IonTabButton tab="bikes" href={RouteEnum.BIKES}>
-              <IonIcon icon={bicycle} />
-              <IonLabel>Bikes</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="account" href={RouteEnum.ACCOUNT}>
-              <IonIcon icon={person} />
-              <IonLabel>Account</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="settings" href={RouteEnum.SETTINGS}>
-              <IonIcon icon={settings} />
-              <IonLabel>Settings</IonLabel>
-            </IonTabButton>
+            {tabs.map((tab) => (
+              <IonTabButton key={tab.name} tab={tab.name} href={tab.href}>
+                <IonIcon icon={tab.icon} />
+                <IonLabel>{tab.label}</IonLabel>
+              </IonTabButton>
+            ))}
           </IonTabBar>
         </IonTabs>
       </IonReactRouter>

@@ -4,17 +4,17 @@ import { useMutation } from "react-query";
 import { useMe } from "../../../common/hooks/useMe";
 import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
 import { queryClient } from "../../../common/query-client/QueryClient";
-import bikesAPI from "../../../services/bikes/bikes.api";
 import {
   Bike,
   RentBikeDetails,
   RentHistoryItem,
-} from "../../../services/bikes/bikes.types";
-import { User } from "../../../services/user/user.types";
+} from "../../../api/bikes/bikes.types";
+import bikesAPI from "../../../api/bikes/bikes.api";
+import { User } from "../../../api/user/user.types";
 
 const rentBike = async (details: RentBikeDetails) => {
   try {
-    const { data } = await bikesAPI.rentBike(details);
+    const data = await bikesAPI.rentBike(details);
 
     return data;
   } catch (error) {

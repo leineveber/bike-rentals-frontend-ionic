@@ -5,11 +5,11 @@ import { useMutation } from "react-query";
 import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
 import { StorageKeysEnum } from "../../../common/models/StorageKeysEnum";
 import { queryClient } from "../../../common/query-client/QueryClient";
-import authAPI from "../../../services/auth/auth.api";
+import authAPI from "../../../api/auth/auth.api";
 
 const logout = async () => {
   try {
-    const { data } = await authAPI.logout();
+    const data = await authAPI.logout();
 
     return data;
   } catch (error) {

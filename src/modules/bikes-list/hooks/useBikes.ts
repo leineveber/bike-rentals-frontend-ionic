@@ -2,11 +2,11 @@ import { useIonAlert } from "@ionic/react";
 import { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
-import bikesAPI from "../../../services/bikes/bikes.api";
+import bikesAPI from "../../../api/bikes/bikes.api";
 
 const getBikes = async () => {
   try {
-    const { data } = await bikesAPI.getBikes();
+    const data = await bikesAPI.getBikes();
 
     return data;
   } catch (error) {

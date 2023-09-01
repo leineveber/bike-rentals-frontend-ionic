@@ -7,12 +7,12 @@ import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
 import { RouteEnum } from "../../../common/models/RouteEnum";
 import { StorageKeysEnum } from "../../../common/models/StorageKeysEnum";
 import { queryClient } from "../../../common/query-client/QueryClient";
-import authAPI from "../../../services/auth/auth.api";
-import { AuthDetails } from "../../../services/auth/auth.types";
+import { AuthDetails } from "../../../api/auth/auth.types";
+import authAPI from "../../../api/auth/auth.api";
 
 const login = async (details: AuthDetails) => {
   try {
-    const { data } = await authAPI.login(details);
+    const data = await authAPI.login(details);
 
     return data;
   } catch (error) {

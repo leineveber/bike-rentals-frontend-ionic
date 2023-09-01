@@ -13,6 +13,7 @@ const ModelFilter: React.FC<Props> = ({ models, filter, setFilter }) => {
       <IonLabel>Model:</IonLabel>
       {models.map((model) => (
         <IonItem
+          key={model}
           onClick={() =>
             setFilter((prev) => ({
               ...prev,

@@ -1,8 +1,8 @@
 import { IonButton, IonContent, IonPopover } from "@ionic/react";
 import React, { useState } from "react";
 import { Rate } from "../../../../common/components/Rate/Rate";
-import { Bike } from "../../../../services/bikes/bikes.types";
 import { useRateBike } from "../../hooks/useRateBike";
+import { Bike } from "../../../../api/bikes/bikes.types";
 
 interface Props {
   bike: Bike | null;

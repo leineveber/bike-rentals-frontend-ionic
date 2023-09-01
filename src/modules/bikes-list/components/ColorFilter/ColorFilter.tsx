@@ -13,6 +13,7 @@ const ColorFilter: React.FC<Props> = ({ colors, filter, setFilter }) => {
       <IonLabel>Color:</IonLabel>
       {colors.map((color) => (
         <IonItem
+          key={color}
           onClick={() =>
             setFilter((prev) => ({
               ...prev,

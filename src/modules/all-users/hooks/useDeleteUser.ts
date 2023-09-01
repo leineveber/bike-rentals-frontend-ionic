@@ -3,12 +3,12 @@ import { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
 import { queryClient } from "../../../common/query-client/QueryClient";
-import userAPI from "../../../services/user/user.api";
-import { User } from "../../../services/user/user.types";
+import userAPI from "../../../api/user/user.api";
+import { User } from "../../../api/user/user.types";
 
 const deleteUser = async (id: number) => {
   try {
-    const { data } = await userAPI.deleteUser(id);
+    const data = await userAPI.deleteUser(id);
 
     return data;
   } catch (error) {

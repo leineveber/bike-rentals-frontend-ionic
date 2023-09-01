@@ -4,16 +4,13 @@ import { useMutation } from "react-query";
 import { useMe } from "../../../common/hooks/useMe";
 import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
 import { queryClient } from "../../../common/query-client/QueryClient";
-import bikesAPI from "../../../services/bikes/bikes.api";
-import {
-  Bike,
-  CancelBikeRentDetails,
-} from "../../../services/bikes/bikes.types";
-import { User, UserRent } from "../../../services/user/user.types";
+import { Bike, CancelBikeRentDetails } from "../../../api/bikes/bikes.types";
+import bikesAPI from "../../../api/bikes/bikes.api";
+import { User, UserRent } from "../../../api/user/user.types";
 
 const cancelBike = async (details: CancelBikeRentDetails) => {
   try {
-    const { data } = await bikesAPI.cancelBikeRent(details);
+    const data = await bikesAPI.cancelBikeRent(details);
 
     return data;
   } catch (error) {

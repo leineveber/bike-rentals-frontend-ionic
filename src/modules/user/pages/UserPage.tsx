@@ -12,36 +12,51 @@ import { RouteEnum } from "../../../common/models/RouteEnum";
 import AllUsersPage from "../../all-users/pages/AllUsersPage";
 import Loading from "../../../common/components/Loading/Loading";
 
+const routes = [
+  {
+    path: RouteEnum.SIGNUP,
+    Component: SignupPage,
+  },
+  {
+    path: RouteEnum.LOGIN,
+    Component: LoginPage,
+  },
+  {
+    path: RouteEnum.DASHBOARD,
+    Component: DashboardPage,
+  },
+  {
+    path: RouteEnum.RENTED_BIKES,
+    Component: RentedBikesPage,
+  },
+  {
+    path: RouteEnum.ALL_USERS,
+    Component: AllUsersPage,
+  },
+  {
+    path: RouteEnum.BIKES_RESERVED_BY_USERS,
+    Component: BikesReservedByUsersPage,
+  },
+  {
+    path: RouteEnum.USERS_WHO_RESERVED_A_BIKE,
+    Component: UsersWhoReservedABikePage,
+  },
+];
+
 const UserPage: React.FC = () => {
   const { data: user } = useMe();
 
   return (
     <IonPage>
-      {user === undefined ? (
+      {!user ? (
         <Loading />
       ) : (
         <IonRouterOutlet>
-          <Route path={RouteEnum.SIGNUP}>
-            <SignupPage />
-          </Route>
-          <Route path={RouteEnum.LOGIN}>
-            <LoginPage />
-          </Route>
-          <Route path={RouteEnum.DASHBOARD}>
-            <DashboardPage />
-          </Route>
-          <Route path={RouteEnum.RENTED_BIKES}>
-            <RentedBikesPage />
-          </Route>
-          <Route path={RouteEnum.ALL_USERS}>
-            <AllUsersPage />
-          </Route>
-          <Route path={RouteEnum.BIKES_RESERVED_BY_USERS}>
-            <BikesReservedByUsersPage />
-          </Route>
-          <Route path={RouteEnum.USERS_WHO_RESERVED_A_BIKE}>
-            <UsersWhoReservedABikePage />
-          </Route>
+          {routes.map(({ path, Component }) => (
+            <Route key={path} path={path}>
+              <Component />
+            </Route>
+          ))}
           <Route exact path={RouteEnum.ACCOUNT}>
             <Redirect to={user ? RouteEnum.DASHBOARD : RouteEnum.SIGNUP} />
           </Route>

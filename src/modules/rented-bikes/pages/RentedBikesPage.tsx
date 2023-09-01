@@ -7,11 +7,11 @@ import { withUser } from "../../../common/hocs/withUser";
 import { useMe } from "../../../common/hooks/useMe";
 import { useNow } from "../../../common/hooks/useNow";
 import { RouteEnum } from "../../../common/models/RouteEnum";
-import { Bike } from "../../../services/bikes/bikes.types";
 import { useBikes } from "../../bikes-list/hooks/useBikes";
 import RateBikePopover from "../components/RateBikePopover/RateBikePopover";
 import RentedBikeCard from "../components/RentedBikeCard/RentedBikeCard";
 import { useCancelBike } from "../hooks/useCancelBike";
+import { Bike } from "../../../api/bikes/bikes.types";
 
 const RentedBikesPage: React.FC = () => {
   const { data: bikes } = useBikes();
@@ -30,6 +30,42 @@ const RentedBikesPage: React.FC = () => {
     [user?.history]
   );
 
+  const bikesMemo = useMemo(
+    () =>
+      rentedBikes.map((rentedBike) => {
+        const currentBike = bikes?.find(
+          (bike) => bike.id === rentedBike.bikeID
+        );
+
+        const isCancellable = rentedBike.dateTo
+          ? now < rentedBike.dateTo
+          : true;
+
+        const isRateable = Boolean(
+          !currentBike?.ratings.find(
+            (bikeRating) => bikeRating.userID === user?.id
+          ) && !isCancellable
+        );
+
+        return currentBike ? (
+          <RentedBikeCard
+            key={rentedBike.id}
+            bike={currentBike}
+            rentedBike={rentedBike}
+            isCancellable={isCancellable}
+            onCancel={() => cancelBike({ rideID: rentedBike.id })}
+            isRateable={isRateable}
+            onRate={(event) => {
+              popoverRef.current!.event = event;
+              setActiveBike(currentBike);
+              setIsVisiblePopover(true);
+            }}
+          />
+        ) : null;
+      }),
+    [bikes, cancelBike, now, rentedBikes, user?.id]
+  );
+
   return (
     <>
       <Page
@@ -42,39 +78,7 @@ const RentedBikesPage: React.FC = () => {
         ) : !rentedBikes || !rentedBikes?.length ? (
           <Empty />
         ) : (
-          <IonList>
-            {rentedBikes.map((rentedBike) => {
-              const currentBike = bikes?.find(
-                (bike) => bike.id === rentedBike.bikeID
-              );
-
-              const isCancellable = rentedBike.dateTo
-                ? now < rentedBike.dateTo
-                : true;
-
-              const isRateable = Boolean(
-                !currentBike?.ratings.find(
-                  (bikeRating) => bikeRating.userID === user?.id
-                ) && !isCancellable
-              );
-
-              return currentBike ? (
-                <RentedBikeCard
-                  key={rentedBike.id}
-                  bike={currentBike}
-                  rentedBike={rentedBike}
-                  isCancellable={isCancellable}
-                  onCancel={() => cancelBike({ rideID: rentedBike.id })}
-                  isRateable={isRateable}
-                  onRate={(event) => {
-                    popoverRef.current!.event = event;
-                    setActiveBike(currentBike);
-                    setIsVisiblePopover(true);
-                  }}
-                />
-              ) : null;
-            })}
-          </IonList>
+          <IonList>{bikesMemo}</IonList>
         )}
       </Page>
 

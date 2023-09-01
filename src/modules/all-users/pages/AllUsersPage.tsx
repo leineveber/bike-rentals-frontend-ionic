@@ -22,7 +22,7 @@ const AllUsersPage: React.FC = () => {
     >
       {isLoading ? (
         <Loading />
-      ) : users ? (
+      ) : users?.length ? (
         <IonList>
           {users.map((user) => (
             <UserCard

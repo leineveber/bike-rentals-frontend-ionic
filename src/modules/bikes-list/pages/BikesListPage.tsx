@@ -4,7 +4,6 @@ import Page from "../../../common/components/Page/Page";
 import BikeCard from "../components/BikeCard/BikeCard";
 import BikesFilter from "../components/BikesFilter/BikesFilter";
 import { useBikes } from "../hooks/useBikes";
-import { Bike } from "../../../services/bikes/bikes.types";
 import BikeRentModal from "../components/BikeRentModal/BikeRentModal";
 import { useMe } from "../../../common/hooks/useMe";
 import Loading from "../../../common/components/Loading/Loading";
@@ -12,6 +11,7 @@ import { useNow } from "../../../common/hooks/useNow";
 import { Filter } from "../models/filter.model";
 import { getFilteredBikes } from "../utils/FilterService";
 import Empty from "../../../common/components/Empty/Empty";
+import { Bike } from "../../../api/bikes/bikes.types";
 
 const filterID = "filter";
 

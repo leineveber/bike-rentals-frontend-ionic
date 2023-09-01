@@ -10,7 +10,7 @@ interface Props {
 const Empty: React.FC<Props> = ({ additionalText }) => {
   return (
     <Center innerClassName="ion-text-center">
-      <Flex direction="column" gap={5}>
+      <Flex align="center" direction="column" gap={5}>
         <IonText>We are sorry, but there is nothing here... :(</IonText>
         {additionalText && <IonText>{additionalText}</IonText>}
       </Flex>

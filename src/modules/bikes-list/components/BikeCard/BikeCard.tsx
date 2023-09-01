@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   IonButton,
   IonCard,
@@ -8,9 +8,9 @@ import {
   IonCardTitle,
   IonImg,
 } from "@ionic/react";
-import { Bike } from "../../../../services/bikes/bikes.types";
 import Rating from "../../../../common/components/Rating/Rating";
 import Flex from "../../../../common/components/Flex/Flex";
+import { Bike } from "../../../../api/bikes/bikes.types";
 
 interface Props {
   bike: Bike;
@@ -20,23 +20,34 @@ interface Props {
 }
 
 const BikeCard: React.FC<Props> = ({ bike, onRent, userID, now }) => {
-  const isBikeAvailable = bike.history
-    ? bike.history.every(
-        (rent) => now < rent.dateFrom || (rent.dateTo && now >= rent.dateTo)
-      )
-    : true;
+  const isBikeAvailable = useMemo(
+    () =>
+      bike.history
+        ? bike.history.every(
+            (rent) => now < rent.dateFrom || (rent.dateTo && now >= rent.dateTo)
+          )
+        : true,
+    [bike.history, now]
+  );
 
-  const isRentedByMe = bike.history
-    ? bike.history.some(
-        (rent) =>
-          now >= rent.dateFrom &&
-          (rent.dateTo ? now < rent.dateTo : true) &&
-          userID &&
-          rent.userID === userID
-      )
-    : false;
+  const isRentedByMe = useMemo(
+    () =>
+      bike.history
+        ? bike.history.some(
+            (rent) =>
+              now >= rent.dateFrom &&
+              (rent.dateTo ? now < rent.dateTo : true) &&
+              userID &&
+              rent.userID === userID
+          )
+        : false,
+    [bike.history, now, userID]
+  );
 
-  const isDisabled = !isBikeAvailable || !userID || isRentedByMe;
+  const isDisabled = useMemo(
+    () => !isBikeAvailable || !userID || isRentedByMe,
+    [isBikeAvailable, userID, isRentedByMe]
+  );
 
   return (
     <IonCard>

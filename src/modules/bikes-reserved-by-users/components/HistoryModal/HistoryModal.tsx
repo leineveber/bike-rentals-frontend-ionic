@@ -12,9 +12,9 @@ import {
 } from "@ionic/react";
 import React from "react";
 import Flex from "../../../../common/components/Flex/Flex";
-import { RentHistoryItem } from "../../../../services/bikes/bikes.types";
 import { dateService } from "../../../../services/date/date.service";
 import { useAllUsers } from "../../../all-users/hooks/useAllUsers";
+import { RentHistoryItem } from "../../../../api/bikes/bikes.types";
 
 interface Props {
   isOpen: boolean;

@@ -2,11 +2,11 @@ import { useIonAlert } from "@ionic/react";
 import { AxiosError } from "axios";
 import { useQuery } from "react-query";
 import { QueryKeysEnum } from "../../../common/models/QueryKeysEnum";
-import userAPI from "../../../services/user/user.api";
+import userAPI from "../../../api/user/user.api";
 
 const getAllUsers = async () => {
   try {
-    const { data } = await userAPI.getAllAcounts();
+    const data = await userAPI.getAllAcounts();
 
     return data;
   } catch (error) {

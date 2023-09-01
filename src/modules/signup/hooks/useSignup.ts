@@ -3,12 +3,12 @@ import { AxiosError } from "axios";
 import { useMutation } from "react-query";
 import { useHistory } from "react-router";
 import { RouteEnum } from "../../../common/models/RouteEnum";
-import authAPI from "../../../services/auth/auth.api";
-import { AuthDetails } from "../../../services/auth/auth.types";
+import { AuthDetails } from "../../../api/auth/auth.types";
+import authAPI from "../../../api/auth/auth.api";
 
 const signup = async (details: AuthDetails) => {
   try {
-    const { data } = await authAPI.signup(details);
+    const data = await authAPI.signup(details);
 
     return data;
   } catch (error) {

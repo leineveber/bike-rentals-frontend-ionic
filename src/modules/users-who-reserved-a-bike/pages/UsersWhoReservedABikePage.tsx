@@ -1,19 +1,22 @@
 import { IonList } from "@ionic/react";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Empty from "../../../common/components/Empty/Empty";
 import Loading from "../../../common/components/Loading/Loading";
 import Page from "../../../common/components/Page/Page";
 import { withAdmin } from "../../../common/hocs/withAdmin";
 import { RouteEnum } from "../../../common/models/RouteEnum";
-import { UserRent } from "../../../services/user/user.types";
 import { useAllUsers } from "../../all-users/hooks/useAllUsers";
 import HistoryModal from "../components/HistoryModal/HistoryModal";
 import UsersWithBikesCard from "../components/UserWithBikesCard/UsersWithBikesCard";
+import { UserRent } from "../../../api/user/user.types";
 
 const UsersWhoReservedABikePage: React.FC = () => {
   const { data: users, isLoading } = useAllUsers();
 
-  const usersWithBikes = users?.filter((user) => user?.history?.length);
+  const usersWithBikes = useMemo(
+    () => users?.filter((user) => user?.history?.length),
+    [users]
+  );
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [currentHistory, setCurrentHistory] = useState<

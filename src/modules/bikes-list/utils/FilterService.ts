@@ -1,4 +1,4 @@
-import { Bike } from "../../../services/bikes/bikes.types";
+import { Bike } from "../../../api/bikes/bikes.types";
 import { Filter } from "../models/filter.model";
 
 class FilterService {
